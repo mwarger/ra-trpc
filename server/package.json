@@ -1,0 +1,3 @@
+{
+  "main": "dist/trpc-react-admin-server.cjs.js"
+}

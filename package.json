@@ -1,0 +1,38 @@
+{
+	"devDependencies": {
+		"@babel/core": "^7.15.5",
+		"@babel/preset-env": "^7.15.6",
+		"@babel/preset-typescript": "^7.15.0",
+		"@preconstruct/cli": "^2.1.4",
+		"@trpc/server": "^9.6.0",
+		"react-admin": "^3.18.0",
+		"zod": "^3.8.2",
+		"typescript": "^4.4.3"
+	},
+	"name": "trpc-react-admin",
+	"version": "0.0.2",
+	"repository": "https://github.com/mwarger/trpc-react-admin.git",
+	"author": "Mat Warger <mwarger@gmail.com>",
+	"license": "MIT",
+	"files": [
+		"server",
+		"client",
+		"dist"
+	],
+	"preconstruct": {
+		"entrypoints": [
+			"server.ts",
+			"client.ts"
+		]
+	},
+	"scripts": {
+		"build": "preconstruct build",
+		"postinstall": "preconstruct dev",
+		"release": "yarn build && npm publish"
+	},
+	"peerDependencies": {
+		"@trpc/server": "^9.6.0",
+		"react-admin": "*",
+		"zod": "^3.8.2"
+	}
+}
