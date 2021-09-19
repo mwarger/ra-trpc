@@ -7,9 +7,9 @@
 		]
 	},
 	"peerDependencies": {
-		"react-admin": "*",
 		"@trpc/server": "^9.6.0",
+		"react-admin": "*",
 		"zod": "^3.8.2"
 	},
-	"version": "0.0.3"
+	"version": "0.0.4"
 }
