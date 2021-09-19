@@ -10,7 +10,7 @@
 		"typescript": "^4.4.3"
 	},
 	"name": "ra-trpc",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"repository": "https://github.com/mwarger/ra-trpc.git",
 	"author": "Mat Warger <mwarger@gmail.com>",
 	"license": "MIT",
