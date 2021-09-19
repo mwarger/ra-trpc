@@ -35,3 +35,7 @@ It takes a TRPC client and a set of resources. The resources allow you to choose
 The routers and data provider on the client should align with the resource names used in the React Admin `Resource` components.
 
 ![](docs/ra-react-admin.png)
+
+There's a `Resources` utility type you can use to provide a mapping.
+
+![](docs/ra-resources.png)
