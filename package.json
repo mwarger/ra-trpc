@@ -26,9 +26,9 @@
 		"dev": "yarn start",
 		"postinstall": "preconstruct dev",
 		"build": "preconstruct build",
-		"prepublish": "yarn build",
+		"prerelease": "yarn build",
 		"pub": "cd packages/ra-trpc && npm publish",
-		"release": "yarn build && npm publish",
+		"release": "yarn lerna publish --no-private",
 		"example": "yarn --cwd examples/next-prisma-starter dx"
 	},
 	"workspaces": {
