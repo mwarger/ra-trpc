@@ -1,6 +1,6 @@
 {
   "name": "@examples/next-starter",
-  "version": "9.6.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "build:1-generate": "prisma generate",
