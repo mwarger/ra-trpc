@@ -1,0 +1,3 @@
+{
+	"main": "dist/ra-trpc-client.cjs.js"
+}

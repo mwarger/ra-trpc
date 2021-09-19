@@ -1,0 +1,15 @@
+{
+	"name": "ra-trpc",
+	"preconstruct": {
+		"entrypoints": [
+			"server.ts",
+			"client.ts"
+		]
+	},
+	"peerDependencies": {
+		"react-admin": "*",
+		"@trpc/server": "^9.6.0",
+		"zod": "^3.8.2"
+	},
+	"version": "0.0.3"
+}

@@ -1,6 +1,13 @@
 {
-  "compilerOptions": {
-    "isolatedModules": true
-  },
-  "include": ["src"]
+	"extends": "./tsconfig.build.json",
+	"include": ["packages", "types", "scripts", "example"],
+	"compilerOptions": {
+		"allowJs": false,
+		"baseUrl": ".",
+		"typeRoots": ["./node_modules/@types", "./types"],
+		"paths": {
+			"ra-trpc": ["packages/ra-trpc/src"],
+			"$test/*": ["test/*"]
+		}
+	}
 }

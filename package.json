@@ -1,15 +1,16 @@
 {
+	"name": "ra-trpc-root",
+	"private": true,
 	"devDependencies": {
 		"@babel/core": "^7.15.5",
 		"@babel/preset-env": "^7.15.6",
 		"@babel/preset-typescript": "^7.15.0",
 		"@preconstruct/cli": "^2.1.4",
-		"@trpc/server": "^9.6.0",
+		"@trpc/server": "^9.6.1",
 		"react-admin": "^3.18.0",
-		"zod": "^3.8.2",
-		"typescript": "^4.4.3"
+		"typescript": "^4.4.3",
+		"zod": "^3.8.2"
 	},
-	"name": "ra-trpc",
 	"version": "0.0.2",
 	"repository": "https://github.com/mwarger/ra-trpc.git",
 	"author": "Mat Warger <mwarger@gmail.com>",
@@ -19,19 +20,26 @@
 		"client",
 		"dist"
 	],
-	"preconstruct": {
-		"entrypoints": [
-			"server.ts",
-			"client.ts"
+	"scripts": {
+		"lerna": "lerna",
+		"start": "preconstruct watch",
+		"dev": "yarn start",
+		"postinstall": "preconstruct dev",
+		"build": "preconstruct build",
+		"prepublish": "yarn build",
+		"publish-lib": "lerna publish --scope=ra-trpc",
+		"release": "yarn build && npm publish",
+		"example": "yarn --cwd examples/next-prisma-starter dx"
+	},
+	"workspaces": {
+		"packages": [
+			"packages/*",
+			"examples/*"
 		]
 	},
-	"scripts": {
-		"build": "preconstruct build",
-		"release": "yarn build && npm publish"
-	},
-	"peerDependencies": {
-		"@trpc/server": "^9.6.0",
-		"react-admin": "*",
-		"zod": "^3.8.2"
+	"preconstruct": {
+		"packages": [
+			"packages/*"
+		]
 	}
 }
