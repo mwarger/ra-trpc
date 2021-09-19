@@ -16,12 +16,25 @@ export function createReactAdminRouter(key: string, router: any) {
 			})
 			// read
 			.query('getMany', {
-				async resolve({ ctx }: any) {
+				input: z.object({
+					select: z.array(z.string()).min(1).optional(),
+				}),
+				async resolve({ ctx, input }: any) {
 					/**
 					 * For pagination you can have a look at this docs site
 					 * @link https://trpc.io/docs/useInfiniteQuery
 					 */
-					return ctx.prisma[key].findMany();
+					return ctx.prisma[key].findMany({
+						select: input.select
+							? input.select.reduce(
+									(prev: Record<string, boolean>, cur: string) => ({
+										...prev,
+										[cur]: true,
+									}),
+									{}
+							  )
+							: undefined,
+					});
 				},
 			})
 			.query('getOne', {

@@ -22,6 +22,7 @@ export const appRouter = createRouter()
    * @link https://trpc.io/docs/error-formatting
    */
   // .formatError(({ shape, error }) => { })
-  .merge('post', createReactAdminRouter('post', postRouter));
+  .merge('post', createReactAdminRouter('post', postRouter))
+  .merge('user', createReactAdminRouter('user', createRouter()));
 
 export type AppRouter = typeof appRouter;

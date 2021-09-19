@@ -9,10 +9,11 @@ import {
   SimpleForm,
   TextInput,
 } from 'react-admin';
-import { createTRPCDataProvider } from 'ra-trpc/client';
+import { createTRPCDataProvider, Resources } from 'ra-trpc/client';
 import superjson from 'superjson';
 import { createTRPCClient } from '@trpc/client';
 import { AppRouter } from '../server/routers/app';
+import type { Post, User } from '.prisma/client';
 
 const ReactAdmin = () => {
   const [trpcClient] = useState(() =>
@@ -22,8 +23,11 @@ const ReactAdmin = () => {
     }),
   );
 
-  const resources = {
-    post: ['title', 'description'],
+  const resources: Resources<{ post: Post; user: User }> = {
+    post: { fields: ['id', 'title', 'text'] },
+    user: {
+      fields: ['id', 'name'],
+    },
   };
 
   const trpcDataProvider = createTRPCDataProvider(trpcClient, resources);
@@ -35,7 +39,13 @@ const ReactAdmin = () => {
         list={ListGuesser}
         show={ShowGuesser}
         edit={EditGuesser}
-        // create={WorkoutCreate}
+        create={PostCreate}
+      />
+      <Resource
+        name="user"
+        list={ListGuesser}
+        show={ShowGuesser}
+        edit={EditGuesser}
       />
     </Admin>
   );
@@ -43,11 +53,13 @@ const ReactAdmin = () => {
 
 export default ReactAdmin;
 
-const WorkoutCreate = (props: any) => (
-  <Create {...props}>
-    <SimpleForm>
-      <TextInput source="title" />
-      <TextInput source="description" />
-    </SimpleForm>
-  </Create>
-);
+const PostCreate = (props: any) => {
+  return (
+    <Create {...props}>
+      <SimpleForm>
+        <TextInput source="title" />
+        <TextInput source="text" />
+      </SimpleForm>
+    </Create>
+  );
+};

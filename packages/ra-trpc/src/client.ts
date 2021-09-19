@@ -1,5 +1,13 @@
 import { DataProvider } from 'react-admin';
 
+export type Resource<DataType> = {
+	fields: (keyof DataType)[];
+};
+
+export type Resources<RecordType> = {
+	[K in keyof RecordType]: Resource<RecordType[K]>;
+};
+
 /**
  * Maps react-admin queries to a json-server powered REST API
  *
@@ -32,10 +40,10 @@ import { DataProvider } from 'react-admin';
  *
  * export default App;
  */
-export function createTRPCDataProvider(
-	trpcClient: any,
-	resources: Record<string, string[]>
-): DataProvider {
+export function createTRPCDataProvider<
+	Mapping extends Record<string, DataType>,
+	DataType = any
+>(trpcClient: any, resources?: Resources<Mapping>): DataProvider {
 	return {
 		getList: (resource, params) => {
 			// const { page, perPage } = params.pagination
@@ -62,32 +70,42 @@ export function createTRPCDataProvider(
 			//     ),
 			//   }
 			// })
-			return trpcClient.query(`${resource}getMany`).then((results: any) => {
-				return {
-					data: results,
-					total: parseInt(results.length ?? '', 10),
-				};
-			});
+			const select = resources?.[resource].fields;
+			console.log('select', select);
+
+			return trpcClient
+				.query(`${resource}getMany`, {
+					select,
+				})
+				.then((results: any) => {
+					return {
+						data: results,
+						total: parseInt(results.length ?? '', 10),
+					};
+				});
 		},
 
 		getOne: (resource, params) => {
+			const select = resources?.[resource].fields;
 			return trpcClient.query(`${resource}getOne`, {
 				id: params.id,
-				select: resources[resource],
+				select: select,
 			});
 		},
 
 		getMany: (resource, params) => {
+			const select = resources?.[resource].fields;
 			console.log('getting many', resource, params);
 			const query = {
-				id: params.ids,
+				ids: params.ids,
+				select,
 			};
-			return trpcClient.query([`${resource}getMany`, query]);
+			return trpcClient.query(`${resource}getMany`, query);
 		},
-
+		// TODO: https://www.prisma.io/docs/concepts/components/prisma-client/select-fields#include-relations-and-select-relation-fields
 		getManyReference: (resource, params) => {
-			const { page, perPage } = params.pagination;
-			const { field, order } = params.sort;
+			// const { page, perPage } = params.pagination;
+			// const { field, order } = params.sort;
 			const query = {
 				id: params.id,
 			};

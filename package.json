@@ -27,7 +27,7 @@
 		"postinstall": "preconstruct dev",
 		"build": "preconstruct build",
 		"prepublish": "yarn build",
-		"publish-lib": "lerna publish --scope=ra-trpc",
+		"publish-lib": "cd packages/ra-trpc && npm publish",
 		"release": "yarn build && npm publish",
 		"example": "yarn --cwd examples/next-prisma-starter dx"
 	},
