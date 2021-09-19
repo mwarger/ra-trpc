@@ -28,6 +28,8 @@ Import the data provider creator with:
 
 It takes a TRPC client and a set of resources. The resources allow you to choose what fields will be fetched for the resource.
 
+> This currently only applies to the `list` and `getOne` operations.
+
 ![](docs/ra-data-provider.png)
 
 ### React Admin
