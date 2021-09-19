@@ -9,9 +9,9 @@
 		"zod": "^3.8.2",
 		"typescript": "^4.4.3"
 	},
-	"name": "trpc-react-admin",
-	"version": "0.0.2",
-	"repository": "https://github.com/mwarger/trpc-react-admin.git",
+	"name": "ra-trpc",
+	"version": "0.0.1",
+	"repository": "https://github.com/mwarger/ra-trpc.git",
 	"author": "Mat Warger <mwarger@gmail.com>",
 	"license": "MIT",
 	"files": [
@@ -27,7 +27,6 @@
 	},
 	"scripts": {
 		"build": "preconstruct build",
-		"postinstall": "preconstruct dev",
 		"release": "yarn build && npm publish"
 	},
 	"peerDependencies": {
